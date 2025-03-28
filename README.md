@@ -22,16 +22,17 @@ Das Projekt automatisiert die gesamte ModelOps-Pipeline von der Datensammlung bi
 2. **Datenpersistenz mit MongoDB**  
    Die gescrapten Daten werden in einer MongoDB-Datenbank gespeichert – lokal oder in der Azure Cloud (CosmosDB-kompatibel).
 
-3. **GPT-Labeling für Sentiment-Kategorisierung**  
-   Ein Teil der Tweets wird mithilfe der ChatGPT-API manuell (semi-supervised) gelabelt:  
+3. **GPT-Filtering und Labeling für Sentiment-Kategorisierung**
+   Gescrapte Tweets werden zuerst mithilfe einer GPT-API auf Relevanz zum Thema geprüft und nicht relevante Tweets werden aussortiert.
+   Danach wird ein Teil der Tweets mithilfe der ChatGPT-API manuell (semi-supervised) gelabelt:  
    - `0 = pro Russland`  
    - `1 = neutral`  
    - `2 = pro Ukraine`
 
-4. **Training eines eigenen Sentiment-Modells**  
+5. **Training eines eigenen Sentiment-Modells**  
    Basierend auf den gelabelten Daten wird ein `roBERTa`-basiertes Modell feingetuned, das auf den Ukraine-Kontext spezialisiert ist.
 
-5. **Sentiment-Prediction für neue Tweets**  
+6. **Sentiment-Prediction für neue Tweets**  
    Das trainierte Modell kann nun neue Tweets automatisch klassifizieren – mit Fokus auf politische, propagandistische oder emotionale Tendenzen.
 
 ---
